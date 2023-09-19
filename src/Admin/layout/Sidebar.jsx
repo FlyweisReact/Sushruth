@@ -5,7 +5,7 @@ import { RiCloseLine } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdDashboardCustomize } from "react-icons/md";
-import { toast } from "react-toastify";
+import { Store } from "react-notifications-component";
 
 const Sidebar = ({ hamb, setHamb }) => {
   const navigate = useNavigate();
@@ -105,8 +105,20 @@ const Sidebar = ({ hamb, setHamb }) => {
 
   const logOut = () => {
     localStorage.clear();
-    navigate("/admin-login");
-    toast.success("Logged Out");
+    navigate("/");
+    Store.addNotification({
+      title: "",
+      message: "Logged Out",
+      type: "success",
+      insert: "top",
+      container: "top-center",
+      animationIn: ["animate__animated", "animate__fadeIn"],
+      animationOut: ["animate__animated", "animate__fadeOut"],
+      dismiss: {
+        duration: 2000,
+        onScreen: true,
+      },
+    });
   };
 
   return (
